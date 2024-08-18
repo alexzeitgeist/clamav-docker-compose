@@ -1,0 +1,20 @@
+[DEFAULT]
+# log_level = DEBUG
+db_url = sqlite:////var/lib/fangfrisch/db.sqlite
+local_directory = /var/lib/clamav
+
+[sanesecurity]
+enabled = yes
+
+[securiteinfo]
+enabled = no
+customer_id =
+# url_0hour = ${prefix}securiteinfo0hour.hdb
+# url_spam_marketing = ${prefix}spam_marketing.ndb
+# url_securiteinfo_mdb = ${prefix}securiteinfo.mdb
+# url_securiteinfo_pdb = ${prefix}securiteinfo.pdb
+# url_securiteinfo_yara = ${prefix}securiteinfo.yara
+# url_securiteinfo_wdb = ${prefix}securiteinfo.wdb
+
+[urlhaus]
+enabled = yes

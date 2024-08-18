@@ -1,0 +1,2 @@
+# Run fangfrisch every 10 minutes
+*/10 * * * * /app/venv/bin/fangfrisch --conf /etc/fangfrisch.conf refresh

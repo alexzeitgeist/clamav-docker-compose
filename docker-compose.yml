@@ -1,0 +1,53 @@
+x-common: &common
+  restart: unless-stopped
+  environment:
+    - TZ
+  tmpfs:
+    - /tmp
+  logging:
+    driver: syslog
+
+services:
+  fangfrisch:
+    <<: *common
+    build:
+      context: ./fangfrisch
+    volumes:
+      - ./fangfrisch/config/fangfrisch.conf:/etc/fangfrisch.conf
+      - ./fangfrisch/config/crontab:/etc/crontab
+      - clamav_signatures:/var/lib/clamav:rw
+      - fangfrisch_db:/var/lib/fangfrisch:rw
+
+  clamsmtp:
+    <<: *common
+    build:
+      context: ./clamsmtp
+    command: ["/usr/sbin/clamsmtpd", "-d", "4"]
+    environment:
+      - TZ
+      - DEBUG
+      - EMAIL_ADMIN
+      - EMAIL_SERVICE
+      - QUARANTINE_FOLDER
+      - SMTP_PORT
+      - SMTP_HOST
+    ports:
+      - "${CLAMSMTP_HOST}:${CLAMSMTP_PORT}:10025"
+    volumes:
+      - ./clamsmtp/config/clamsmtpd.conf:/etc/clamsmtpd.conf
+      - clamav_cache:/var/spool/clamsmtp:rw
+      - clamav_quarantine:/var/spool/quarantine:rw
+
+  clamav:
+    <<: *common
+    image: clamav/clamav:1.3_base
+    volumes:
+      - ./clamav/config/clamd.conf:/etc/clamav/clamd.conf
+      - clamav_cache:/var/spool/clamsmtp:rw
+      - clamav_signatures:/var/lib/clamav:rw
+
+volumes:
+  clamav_cache:
+  clamav_quarantine:
+  clamav_signatures:
+  fangfrisch_db:
