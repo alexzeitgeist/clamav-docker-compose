@@ -22,7 +22,7 @@ services:
     <<: *common
     build:
       context: ./clamsmtp
-    command: ["/usr/sbin/clamsmtpd", "-d", "4"]
+    command: ["/usr/sbin/clamsmtpd", "-d", "2"]
     environment:
       - TZ
       - DEBUG
