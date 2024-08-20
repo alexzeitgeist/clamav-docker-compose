@@ -2,7 +2,7 @@ FROM golang:alpine AS builder
 
 ENV CGO_ENABLED=0
 
-RUN go install -ldflags="-s -w" github.com/alexzeitgeist/clamaction@v1.0.2
+RUN go install -ldflags="-s -w" github.com/alexzeitgeist/clamaction/cmd/clamaction@v1.0.2
 
 FROM alpine:3.20
 LABEL org.opencontainers.image.authors="Alexander Turcic <alexander@pixel-plus.ch>"
