@@ -40,7 +40,7 @@ services:
 
   clamav:
     <<: *common
-    image: clamav/clamav:1.3_base
+    image: clamav/clamav:1.4_base
     volumes:
       - ./clamav/config/clamd.conf:/etc/clamav/clamd.conf
       - clamav_cache:/var/spool/clamsmtp:rw
