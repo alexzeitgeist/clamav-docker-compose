@@ -3,7 +3,7 @@ LABEL org.opencontainers.image.authors="Alexander Turcic <alexander@pixel-plus.c
 
 RUN apk add --update --no-cache --virtual .build-deps gcc libffi-dev musl-dev \
     && python -m venv /app/venv \
-    && /app/venv/bin/pip install --no-cache-dir fangfrisch==1.9.0 \
+    && /app/venv/bin/pip install --no-cache-dir fangfrisch==1.9.1 \
     && apk del .build-deps
 
 FROM python:3-alpine
