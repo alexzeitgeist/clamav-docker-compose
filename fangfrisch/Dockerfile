@@ -26,4 +26,4 @@ USER clamav
 ENV PATH="/app/venv/bin:$PATH"
 WORKDIR /app
 
-ENTRYPOINT ["supercronic", "/etc/crontab"]
+ENTRYPOINT ["/usr/bin/supercronic", "/etc/crontab"]
